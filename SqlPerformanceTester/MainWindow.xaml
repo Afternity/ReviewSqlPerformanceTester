@@ -1,0 +1,69 @@
+<Window x:Class="SqlPerformanceTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="SQL Performance Tester" Height="600" Width="820" ResizeMode="CanMinimize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Сервер:" Style="{StaticResource LabelStyle}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Server, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource TextBoxStyle}"/>
+
+        <Label Grid.Row="0" Grid.Column="2" Content="БД:" Style="{StaticResource LabelStyle}"/>
+        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Database, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource TextBoxStyle}"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Запрос:" Style="{StaticResource LabelStyle}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                 Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource MultilineTextBoxStyle}" Height="80"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Потоки:" Style="{StaticResource LabelStyle}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ThreadsCount, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource TextBoxStyle}"/>
+
+        <Label Grid.Row="2" Grid.Column="2" Content="Время (сек.):" Style="{StaticResource LabelStyle}"/>
+        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding TestDuration, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource TextBoxStyle}"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Таймер:" Style="{StaticResource LabelStyle}"/>
+        <Label Grid.Row="3" Grid.Column="1" Content="{Binding Countdown}"
+               Style="{StaticResource CountdownLabelStyle}"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Результат:" Style="{StaticResource LabelStyle}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                 Text="{Binding OutputFile, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource TextBoxStyle}"/>
+        <Button Grid.Row="4" Grid.Column="3" Content="Сохранить как..."
+                Command="{Binding BrowseCommand}" Style="{StaticResource SecondaryButtonStyle}"/>
+
+        <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
+                    Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Старт" Command="{Binding StartCommand}"
+                    IsEnabled="{Binding CanStart}" Style="{StaticResource PrimaryButtonStyle}" Width="140"/>
+            <Button Content="Стоп" Command="{Binding StopCommand}"
+                    IsEnabled="{Binding CanStop}" Style="{StaticResource DangerButtonStyle}" Width="140" Margin="15,0,0,0"/>
+            <Button Content="Выход" Command="{Binding ExitCommand}"
+                    IsEnabled="{Binding CanExit}" Style="{StaticResource SecondaryButtonStyle}" Width="140" Margin="15,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
